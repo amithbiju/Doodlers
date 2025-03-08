@@ -7,6 +7,8 @@ import Navbar from "./Components/Navbar";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AddItemPage from "./pages/AddItemPage";
+import BillItemPage from "./pages/BillItemPage";
+import BillListPage from "./pages/BillListPage";
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/add-item" element={<AddItemPage />} />
+            <Route path="/bill-item" element={<BillListPage />} />
+            <Route path="/bill/:part_id" element={<BillItemPage />} />
           </Routes>
         </main>
       </Router>
