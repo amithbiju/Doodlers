@@ -2,8 +2,8 @@ import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 
 const navigation = [
-  { name: "Go Shopping", href: "#" },
-  { name: "My Cart", href: "#" },
+  { name: "Predict", href: "#" },
+  { name: "Bill", href: "#" },
 ];
 
 const Navbar = () => {
@@ -33,7 +33,7 @@ const Navbar = () => {
             <div className="flex lg:flex-1">
               <a href="#" className="-m-1.5 p-1.5">
                 <span className="sr-only">Your Company</span>
-                <a className="text-sm font-semibold leading-6 text-gray-900">
+                <a className="text-sm font-semibold leading-6 text-white">
                   Flight Maintanance
                 </a>
               </a>
@@ -51,16 +51,16 @@ const Navbar = () => {
             <div className=" lg:flex lg:gap-x-12 md:gap-x-12">
               <a
                 href="/scanner"
-                className="text-sm font-semibold leading-6 text-gray-900"
+                className="text-sm font-semibold leading-6 text-white"
               >
-                Go Shopping{" "}
+                Predict{" "}
               </a>
-              <a className="text-sm font-semibold leading-6 text-gray-900">
-                My List{" "}
+              <a className="text-sm font-semibold leading-6 text-white">
+                Bill{" "}
               </a>
             </div>
             <div className=" lg:flex lg:flex-1 lg:justify-end">
-              <button className="text-sm font-semibold leading-6 text-gray-900">
+              <button className="text-sm font-semibold leading-6 text-white">
                 Sign Out <span aria-hidden="true">&rarr;</span>
               </button>
             </div>

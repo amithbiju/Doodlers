@@ -88,7 +88,7 @@ export default function BillItem() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center p-8 w-full">
+    <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center p-8 pt-16 w-full">
       <h1 className="text-3xl font-bold text-blue-400">Bill Item</h1>
       <form
         onSubmit={handleSubmit}
