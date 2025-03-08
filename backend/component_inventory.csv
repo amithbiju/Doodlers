@@ -1,5 +1,5 @@
 part_id,current_stock,lead_time,min_stock
-B777-ENG-001,8,45,2
 A320-HYD-002,10,30,2
-B737-LG-003,15,60,3
 A350-AV-004,16,25,2
+B777-ENG-001,2,45,2
+B737-LG-003,15,60,3

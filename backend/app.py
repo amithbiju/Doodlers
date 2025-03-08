@@ -7,10 +7,10 @@ import cartopy.feature as cfeature
 import io
 
 # Define time range and parameters
-t0 = "2024-08-08T03:00:00Z"
-t1 = "2024-08-08T06:00:00Z"
+t0 = "2025-03-08T03:00:00Z"
+t1 = "2025-03-08T06:00:00Z"
 params = {
-    "bbox": [-120,20,-70,65],  # Changed to string format
+    "bbox":[-65, 45, -10, 60],  # Changed to string format
     "aircraft_type": "A320",
     "time": t0,  # initialize the time parameter
 }

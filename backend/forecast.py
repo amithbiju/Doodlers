@@ -1,6 +1,14 @@
 import pandas as pd
 from prophet import Prophet
 from datetime import datetime, timedelta
+from fireb import update,initialize_firebase
+
+
+initialize_firebase()
+update()
+
+
+
 
 # Load datasets
 demand_data = pd.read_csv("aircraft_demand_dataset.csv")
@@ -8,8 +16,6 @@ inventory_data = pd.read_csv("component_inventory.csv")
 
 # Convert 'ds' to datetime
 demand_data["ds"] = pd.to_datetime(demand_data["ds"])
-
-
 
 def train_prophet_model(part_data):
     model = Prophet(yearly_seasonality=True, weekly_seasonality=True)
@@ -57,16 +63,17 @@ def identify_urgent_orders(reorder_date, lead_time, current_date):
     days_left = (latest_order_date - current_date).days
     
     # Check if urgent (less than 7 days left)
-    is_urgent = days_left < 7
+    is_urgent = days_left < 40
     return days_left, is_urgent
 
 # Example: Check if order is urgent
 current_date = datetime.now()
+date_string = "2025-1-1 15:30:45.123456"
+
+current_date = datetime.strptime(date_string, "%Y-%m-%d %H:%M:%S.%f")
 days_left, is_urgent = identify_urgent_orders(reorder_date, lead_time, current_date)
 print(f"Days left to order: {days_left}, Urgent: {is_urgent}")
 
-# Current date
-current_date = datetime.now()
 
 # Results storage
 orders_to_place = []
