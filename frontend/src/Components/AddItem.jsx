@@ -13,13 +13,28 @@ export default function AddItem() {
   });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    // Convert current_stock and min_stock to numbers
+    if (name === "current_stock" || name === "min_stock") {
+      setFormData({ ...formData, [name]: value === "" ? "" : Number(value) });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Create a copy of the form data with appropriate numeric conversions
+    const submissionData = {
+      ...formData,
+      current_stock: Number(formData.current_stock),
+      min_stock: Number(formData.min_stock),
+    };
+
     try {
-      await addDoc(collection(db, "items"), formData);
+      await addDoc(collection(db, "items"), submissionData);
       alert("Item added successfully!");
       setFormData({
         part_id: "",
@@ -48,7 +63,11 @@ export default function AddItem() {
               {key.replace("_", " ")}
             </label>
             <input
-              type="text"
+              type={
+                key === "current_stock" || key === "min_stock"
+                  ? "number"
+                  : "text"
+              }
               name={key}
               value={formData[key]}
               onChange={handleChange}
