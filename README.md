@@ -16,10 +16,11 @@ The official template repository for Define 3.0
 ### Team Members
 | Name | Role | GitHub | LinkedIn |
 |------|------|--------|----------|
-| [Aryan Anil] | [Role] | [@username](https://github.com/username) | [Profile](https://linkedin.com/in/username) |
-| [Full Name] | [Role] | [@username](https://github.com/username) | [Profile](https://linkedin.com/in/username) |
-| [Full Name] | [Role] | [@username](https://github.com/username) | [Profile](https://linkedin.com/in/username) |
-| [Full Name] | [Role] | [@username](https://github.com/username) | [Profile](https://linkedin.com/in/username) |
+| [Aryan Anil] | [Backend] | [@aryan-anil](https://github.com/aryan-anil) | [Profile](https://www.linkedin.com/in/aryan-anil-4a443724b/) |
+| [Amith Biju] | [Frontend] | [@username](https://github.com/username) | [Profile](https://linkedin.com/in/username) |
+| [B KARTHIKEYAN] | [FRONTEND] | [@ZELYX16](https://github.com/ZELYX16) | [Profile](https://www.linkedin.com/in/b-karthikeyan-b95041173/) |
+| [Afsal Muhammed R] | [Backend] | [@afsalmuhammedr](https://github.com/afsalmuhammedr) | [Profile](www.linkedin.com/in/
+afsal-muhammed-r-b57464271) |
 
 ## Project Details
 
