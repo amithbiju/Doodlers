@@ -1,0 +1,9 @@
+Flask
+flask-cors
+firebase-admin
+numpy
+tensorflow
+weather_service
+flight_service
+optimization_service
+ml_models
