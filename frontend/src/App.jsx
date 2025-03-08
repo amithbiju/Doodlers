@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Navbar from "./Components/Navbar";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AddItemPage from "./pages/AddItemPage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <main className="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/add-item" element={<AddItemPage />} />
           </Routes>
         </main>
       </Router>
