@@ -7,14 +7,19 @@ import cartopy.feature as cfeature
 import io
 
 # Define time range and parameters
-t0 = "2025-03-08T03:00:00Z"
-t1 = "2025-03-08T06:00:00Z"
+t0 = "2024-09-11T03:00:00"
+
 params = {
-    "bbox":[-65, 45, -10, 60],  # Changed to string format
-    "aircraft_type": "A320",
-    "time": t0,  # initialize the time parameter
+  "bbox": [
+      -120,
+      20,
+      30,
+      65,
+  ],
+  "aircraft_type": "A320",
+  "time": "2024-04-11T03:00:00"
 }
-times = pd.date_range(t0, t1, freq="1h")
+times = pd.date_range(t0, t0)
 
 # Google Contrail API URL and API Key
 GOOGLE_URL = "https://contrails.googleapis.com/v1/grid/ef"
@@ -62,6 +67,14 @@ ds = get_ds(GOOGLE_URL, params, headers)
 if ds is not None:
     print(ds)
 
+    df = ds.to_dataframe()
+    print(df)
+
+    df.to_csv("contrail_data.csv")
+    print("Dataset saved as contrail_data.csv")
+
+
+
     # Plotting the data
     def plot_data(ds):
         # Select a specific time and flight level for plotting
@@ -70,6 +83,8 @@ if ds is not None:
         # Create a plot
         plt.figure(figsize=(10, 6))
         ax = plt.axes(projection=ccrs.PlateCarree())
+        ax.set_extent([-180, 180, -90, 90], crs=ccrs.PlateCarree())
+
         ax.add_feature(cfeature.COASTLINE)
         ax.add_feature(cfeature.BORDERS, linestyle=':')
         ax.add_feature(cfeature.LAND, edgecolor='black')
