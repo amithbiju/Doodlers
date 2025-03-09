@@ -1,88 +1,123 @@
-import { useState } from "react";
-import { db } from "../Firebase/Config";
-import { collection, addDoc } from "firebase/firestore";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-export default function AddItem() {
-  const [formData, setFormData] = useState({
-    part_id: "",
-    name: "",
-    description: "",
-    current_stock: "",
-    lead_time: "",
-    min_stock: "",
-  });
+const Predict = () => {
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    // Convert current_stock and min_stock to numbers
-    if (name === "current_stock" || name === "min_stock") {
-      setFormData({ ...formData, [name]: value === "" ? "" : Number(value) });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    // Create a copy of the form data with appropriate numeric conversions
-    const submissionData = {
-      ...formData,
-      current_stock: Number(formData.current_stock),
-      min_stock: Number(formData.min_stock),
+  useEffect(() => {
+    // Function to fetch orders data
+    const fetchOrders = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get("http://127.0.0.1:5000/get_orders");
+        setOrders(response.data);
+        setError(null);
+      } catch (err) {
+        setError("Failed to fetch orders. Please try again later.");
+        console.error("Error fetching orders:", err);
+      } finally {
+        setLoading(false);
+      }
     };
 
-    try {
-      await addDoc(collection(db, "items"), submissionData);
-      alert("Item added successfully!");
-      setFormData({
-        part_id: "",
-        name: "",
-        description: "",
-        current_stock: "",
-        lead_time: "",
-        min_stock: "",
-      });
-    } catch (error) {
-      console.error("Error adding item: ", error);
-      alert("Failed to add item.");
+    fetchOrders();
+  }, []);
+
+  // Function to determine status color based on days_left and current_stock
+  const getStatusColor = (daysLeft, currentStock, minStock) => {
+    if (daysLeft < 0 || currentStock <= minStock) {
+      return "text-red-400 font-bold";
+    } else if (daysLeft < 15) {
+      return "text-yellow-400 font-bold";
+    } else {
+      return "text-green-400";
     }
   };
+
+  // Format reorder date
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+  };
+
+  if (loading) {
+    return (
+      <div className="text-center p-4 text-white">Loading orders data...</div>
+    );
+  }
+
+  if (error) {
+    return <div className="text-center p-4 text-red-400">{error}</div>;
+  }
 
   return (
     <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center p-8 pt-16 w-full">
-      <h1 className="text-3xl font-bold text-blue-400">Add Item</h1>
-      <form
-        onSubmit={handleSubmit}
-        className="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-3xl mt-6"
-      >
-        {Object.keys(formData).map((key) => (
-          <div key={key} className="mb-4">
-            <label className="block text-gray-300 capitalize">
-              {key.replace("_", " ")}
-            </label>
-            <input
-              type={
-                key === "current_stock" || key === "min_stock"
-                  ? "number"
-                  : "text"
-              }
-              name={key}
-              value={formData[key]}
-              onChange={handleChange}
-              className="w-full p-2 mt-1 bg-gray-700 text-white border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
-            />
-          </div>
-        ))}
-        <button
-          type="submit"
-          className="w-full bg-blue-500 p-2 rounded mt-4 hover:bg-blue-600 transition-all"
-        >
-          Add Item
-        </button>
-      </form>
+      <h1 className="text-3xl font-bold text-blue-400 mb-6">
+        Parts Inventory & Reorder List
+      </h1>
+
+      {orders.length === 0 ? (
+        <div className="text-center p-4 text-gray-300">No orders found</div>
+      ) : (
+        <div className="overflow-x-auto w-full max-w-3xl">
+          <table className="min-w-full bg-gray-800 shadow-lg rounded-lg overflow-hidden">
+            <thead className="bg-gray-700 text-gray-300">
+              <tr>
+                <th className="py-3 px-4 text-left">Part ID</th>
+                <th className="py-3 px-4 text-left">Current Stock</th>
+                <th className="py-3 px-4 text-left">Min Stock</th>
+                <th className="py-3 px-4 text-left">Days Left</th>
+                <th className="py-3 px-4 text-left">Lead Time</th>
+                <th className="py-3 px-4 text-left">Reorder Date</th>
+                <th className="py-3 px-4 text-left">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {orders.map((order) => (
+                <tr key={order.part_id} className="border-t border-gray-700">
+                  <td className="py-3 px-4">{order.part_id}</td>
+                  <td className="py-3 px-4">{order.current_stock}</td>
+                  <td className="py-3 px-4">{order.min_stock}</td>
+                  <td
+                    className={`py-3 px-4 ${
+                      order.days_left < 0 ? "text-red-400" : ""
+                    }`}
+                  >
+                    {order.days_left}
+                  </td>
+                  <td className="py-3 px-4">{order.lead_time} days</td>
+                  <td className="py-3 px-4">
+                    {formatDate(order.reorder_date)}
+                  </td>
+                  <td
+                    className={`py-3 px-4 ${getStatusColor(
+                      order.days_left,
+                      order.current_stock,
+                      order.min_stock
+                    )}`}
+                  >
+                    {order.days_left < 0
+                      ? "Overdue"
+                      : order.current_stock <= order.min_stock
+                      ? "Critical Stock"
+                      : order.days_left < 15
+                      ? "Order Soon"
+                      : "In Stock"}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
-}
+};
+
+export default Predict;

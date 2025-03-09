@@ -2,7 +2,7 @@ export default function Home() {
   const cards = [
     { title: "Add Item", route: "/add-item" },
     { title: "Bill Item", route: "/bill-item" },
-    { title: "Predict Usage", route: "/predict-usage" },
+    { title: "Predict Usage", route: "/predict" },
     { title: "Add Usage", route: "/add-usage" },
   ];
 

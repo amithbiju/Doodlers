@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AddItemPage from "./pages/AddItemPage";
 import BillItemPage from "./pages/BillItemPage";
 import BillListPage from "./pages/BillListPage";
+import PredictPage from "./pages/PredictPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/add-item" element={<AddItemPage />} />
             <Route path="/bill-item" element={<BillListPage />} />
+            <Route path="/predict" element={<PredictPage />} />
             <Route path="/bill/:part_id" element={<BillItemPage />} />
           </Routes>
         </main>

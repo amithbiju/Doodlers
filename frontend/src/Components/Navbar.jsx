@@ -50,12 +50,15 @@ const Navbar = () => {
           </div> */}
             <div className=" lg:flex lg:gap-x-12 md:gap-x-12">
               <a
-                href="/scanner"
+                href="/predict"
                 className="text-sm font-semibold leading-6 text-white"
               >
                 Predict{" "}
               </a>
-              <a className="text-sm font-semibold leading-6 text-white">
+              <a
+                className="text-sm font-semibold leading-6 text-white"
+                href="/bill-item"
+              >
                 Bill{" "}
               </a>
             </div>

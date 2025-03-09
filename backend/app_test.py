@@ -10,8 +10,9 @@ df = pd.read_csv('modified_contrail_data.csv')
 df_filtered = df[(df['flight_level'] >= 270) & (df['flight_level'] <= 400)]
 
 # Ensure start and end points are in the dataset
-start = (10.210497856140137,75.759033203125,350)
-end = (10.960497856140137,77.509033203125,430)
+start = (9.710497856140137,75.509033203125,270)
+end = (10.960497856140137,77.509033203125,280)
+       
 df_filtered = pd.concat([df_filtered, pd.DataFrame([{'longitude': start[0], 'latitude': start[1], 'flight_level': start[2]},
                                                      {'longitude': end[0], 'latitude': end[1], 'flight_level': end[2]}])],
                         ignore_index=True)

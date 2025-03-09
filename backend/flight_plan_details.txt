@@ -1,0 +1,51 @@
+DETAILED FLIGHT PLAN
+===================
+
+Origin: (10.210498, 75.759033) at FL350
+Destination: (10.960498, 77.509033) at FL430
+Total Distance: 226.27 km
+Estimated Fuel Consumption: 1357.59 units
+
+WAYPOINTS
+=========
+
+Waypoint 0: (10.210498, 75.759033) at FL350 (ORIGIN)
+
+Waypoint 1: (10.460498, 76.009033) at FL350
+   Leg Distance: 39.00 km
+   Cumulative Distance: 39.00 km
+   Heading: 44.5°
+
+Waypoint 2: (10.460498, 76.259033) at FL350
+   Leg Distance: 27.34 km
+   Cumulative Distance: 66.33 km
+   Heading: 90.0°
+
+Waypoint 3: (10.460498, 76.509033) at FL350
+   Leg Distance: 27.34 km
+   Cumulative Distance: 93.67 km
+   Heading: 90.0°
+
+Waypoint 4: (10.460498, 76.759033) at FL350
+   Leg Distance: 27.34 km
+   Cumulative Distance: 121.01 km
+   Heading: 90.0°
+
+Waypoint 5: (10.710498, 77.009033) at FL350
+   Leg Distance: 38.98 km
+   Cumulative Distance: 159.99 km
+   Heading: 44.5°
+
+Waypoint 6: (10.710498, 77.259033) at FL350
+   Leg Distance: 27.31 km
+   Cumulative Distance: 187.30 km
+   Heading: 90.0°
+   Nearby Hazards:
+     - Icing (severity 6) at 14.7 km
+
+Waypoint 7: (10.960498, 77.509033) at FL430
+   Leg Distance: 38.96 km
+   Cumulative Distance: 226.27 km
+   Heading: 44.5°
+   Altitude Change: +80 FL
+

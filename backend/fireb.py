@@ -8,7 +8,7 @@ def initialize_firebase():
     """
     Initializes Firebase with the provided service account credentials.
     """
-    cred = credentials.Certificate("flight-maintenance-firebase-adminsdk-fbsvc-f087e37cb5.json")
+    cred = credentials.Certificate("flight-maintenance-firebase-adminsdk-fbsvc-8c002bcb92.json")
     firebase_admin.initialize_app(cred)
     global db, collection_ref, collection_ref_bill
     db = firestore.client()
